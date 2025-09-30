@@ -11,20 +11,20 @@ from flex_func import (
     random_regular
 );
 
-n_list = np.arange(400, 501, 100)
+n_list = np.arange(100, 501, 100)
 p_list = [0.8, 1/2, 1/4]
 seed = 25092525
 
 # Generate scenarios and save them 
-for n in n_list:
-    for p in p_list:
-        # generate 1000 scenarios for evaluation later
-        n_scenarios = 1000
-        supply_vec, demand_vec  = generate_scenarios(n_scenarios, n=n, p=p, seed=seed)
-        scenarios = (supply_vec, demand_vec)
-
-        with open(f"results/scenarios/n_{n}_p_{p}_seed_{seed}.pkl", "wb") as f:
-            pickle.dump(scenarios, f)
+#for n in n_list:
+#    for p in p_list:
+#        # generate 1000 scenarios for evaluation later
+#        n_scenarios = 1000
+#        supply_vec, demand_vec  = generate_scenarios(n_scenarios, n=n, p=p, #seed=seed)
+#        scenarios = (supply_vec, demand_vec)
+#
+#        with open(f"results/scenarios/n_{n}_p_{p}_seed_{seed}.pkl", "wb") #as f:
+#            pickle.dump(scenarios, f)
 
 # Given n, p, and design, computed the expected loss for each d
 def loss_per_d(n, design_name, e_model, full_evals, d_list, num_designs, seed):
@@ -65,13 +65,14 @@ def main():
 
     for n in n_list:
         for p in p_list:
+            
             print('n', n, 'p', p)
 
             with open(f"results/scenarios/n_{n}_p_{p}_seed_{seed}.pkl", "rb") as f:
                 supply_vec, demand_vec = pickle.load(f)
             
             d_max = int(np.ceil(np.log(1e-8/(n*p))/np.log(1-p)))
-            d_list = list(range(2, min(d_max, 25), 2))
+            d_list = list(range(2, min(d_max, 21), 2))
             
             final_results = {}
             
