@@ -11,7 +11,7 @@ from flex_func import (
     random_regular
 );
 
-n_list = np.arange(100, 401, 100)
+n_list = np.arange(400, 501, 100)
 p_list = [0.8, 1/2, 1/4]
 seed = 25092525
 
