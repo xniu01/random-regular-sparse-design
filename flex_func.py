@@ -168,7 +168,8 @@ def random_regular(n, d, seed=None):
     right_stubs = np.repeat(np.arange(n), d)
     np.random.shuffle(right_stubs)
     # Step 3: Randomly match half-edges to create edges
-    np.add.at(E, (left_stubs, right_stubs), 1)
+    #np.add.at(E, (left_stubs, right_stubs), 1) #This generates multi-edges
+    E[left_stubs, right_stubs] = 1 #This removes multi-edges.
 
     return np.array(E)
 
